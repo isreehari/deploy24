@@ -76,6 +76,11 @@ abstract class AbstractHook {
     /**
      * A callback function to call after the deploy has finished.
      */
+    private $composer;
+
+    /**
+     * A callback function to call after the deploy has finished.
+     */
     private $callback;
 
     /**
@@ -111,7 +116,7 @@ abstract class AbstractHook {
 
         $this->name = $name;
 
-        $available_options = array('branch', 'remote', 'commit', 'callback');
+        $available_options = array('branch', 'remote', 'commit', 'callback', 'composer');
 
         foreach($repo as $option => $value){
             if(in_array($option, $available_options)){
@@ -145,9 +150,10 @@ abstract class AbstractHook {
         }
 
         $defaults = array(
-            'remote'      => 'origin',
+            'remote' => 'origin',
             'callback' => '',
-            'commit'      => '',
+            'commit' => '',
+            'composer' => false
         );
         $repo = array_merge($defaults, $repo);
 
@@ -189,6 +195,11 @@ abstract class AbstractHook {
 
             // Secure the .git directory
             exec('chmod -R og-rx .git');
+
+            if($thsi->composer) {
+                // Composer update
+                exec('composer update');
+            }
 
             if(is_callable($this->callback)) {
                 call_user_func($this->callback);
