@@ -9,13 +9,13 @@ return array(
 		'branch' => 'master',
 		'remote' => 'origin',
 		'path' => '/var/www/rusantic.deploy24.com/',
-		'composer' => true
+		'commands' => array('commands update', 'commands dump-autoload')
 	),
 	'chatter.deploy24.com' => array(
 		'branch' => 'master',
 		'remote' => 'origin',
 		'path' => '/var/www/chatter.deploy24.com/',
-		'composer' => true
+		'commands' => array('commands update', 'commands dump-autoload')
 	),
 );
 

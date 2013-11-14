@@ -24,12 +24,6 @@ namespace Deploy;
 
 abstract class AbstractHook {
     /**
-     * The name of the file that will be used for logging deployments. Set
-     * to false to disable logging.
-     */
-    public $logEnable = true;
-
-    /**
      * Registered deploy repos
      */
     protected $repos = array();
@@ -74,14 +68,24 @@ abstract class AbstractHook {
     private $path;
 
     /**
-     * A callback function to call after the deploy has finished.
+     * Custom commands array
      */
-    private $composer;
+    private $commands;
 
     /**
      * A callback function to call after the deploy has finished.
      */
     private $callback;
+
+    /**
+     * Flag for use logging
+     */
+    private $logging;
+
+    /**
+     * Flag for use .git securing
+     */
+    private $secure;
 
     /**
      * The commit that we are attempting to deploy
@@ -116,7 +120,7 @@ abstract class AbstractHook {
 
         $this->name = $name;
 
-        $available_options = array('branch', 'remote', 'commit', 'callback', 'composer');
+        $available_options = array('branch', 'remote', 'commit', 'callback', 'commands', 'logging', 'secure');
 
         foreach($repo as $option => $value){
             if(in_array($option, $available_options)){
@@ -153,7 +157,9 @@ abstract class AbstractHook {
             'remote' => 'origin',
             'callback' => '',
             'commit' => '',
-            'composer' => false
+            'commands' => array(),
+            'logging' => false,
+            'secure' => false
         );
         $repo = array_merge($defaults, $repo);
 
@@ -167,7 +173,7 @@ abstract class AbstractHook {
      * @param    string    $type        The type of log message(e.g. INFO, DEBUG, ERROR, etc.)
      */
     protected function log($message, $type = 'INFO') {
-    	if($this->logEnable) {
+    	if($this->logging) {
 	        $filename = $this->logPath . '/' . rtrim($this->logName, '/');
 
 	        if(!file_exists($filename)) {
@@ -193,12 +199,16 @@ abstract class AbstractHook {
             // Update the local repository
             exec('git pull ' . $this->remote . ' ' . $this->branch);
 
-            // Secure the .git directory
-            exec('chmod -R og-rx .git');
+            if($this->secure) {
+                // Secure the .git directory
+                exec('chmod -R og-rx .git');
+            }
 
-            if($this->composer) {
-                // Composer update
-                exec('composer update');
+            // Custom commands
+            if(is_array($this->commands)) {
+                foreach ($this->commands as $command) {
+                    exec($command);
+                }
             }
 
             if(is_callable($this->callback)) {
