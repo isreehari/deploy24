@@ -11,7 +11,7 @@ return array(
 		'path' => '/var/www/rusantic.deploy24.com/',
 		'composer' => true
 	),
-	'Chatter Demo' => array(
+	'chatter.deploy24.com' => array(
 		'branch' => 'master',
 		'remote' => 'origin',
 		'path' => '/var/www/chatter.deploy24.com/',
