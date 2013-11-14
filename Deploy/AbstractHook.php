@@ -196,7 +196,7 @@ abstract class AbstractHook {
             // Secure the .git directory
             exec('chmod -R og-rx .git');
 
-            if($thsi->composer) {
+            if($this->composer) {
                 // Composer update
                 exec('composer update');
             }
