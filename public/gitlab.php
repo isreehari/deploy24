@@ -11,5 +11,5 @@
 		$repos = require_once APP_PATH.'/config/gitlab.php';
 
 		$hook = new Deploy\GitLabHook($repos);
-		$hook->payload();
+		$hook->payload($payload);
 	}
