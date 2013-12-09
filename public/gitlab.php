@@ -5,10 +5,7 @@
 	require_once APP_PATH.'/Deploy/AbstractHook.php';
 	require_once APP_PATH.'/Deploy/GitLabHook.php';
 
-	if(isset($_POST['payload']))
-	{
-		$repos = require_once APP_PATH.'/config/gitlab.php';
+	$repos = require_once APP_PATH.'/config/gitlab.php';
 
-		$hook = new Deploy\GitLabHook($repos);
-		$hook->payload($_POST['payload']);
-	}
+	$hook = new Deploy\GitLabHook($repos);
+	$hook->payload(file_get_contents("php://input"));
