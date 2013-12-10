@@ -30,7 +30,7 @@ return array(
         'submodule' => true
     ),
     'zakonum.ru' => array(
-        'branch' => 'master',
+        'branch' => 'develop',
         'remote' => 'origin',
         'path' => '/var/www/zakonum.deploy24.com/',
         'commands' => array(
