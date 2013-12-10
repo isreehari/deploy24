@@ -15,13 +15,27 @@ return array(
         'branch' => 'master',
         'remote' => 'origin',
         'path' => '/var/www/rusantic.deploy24.com/',
-        'commands' => array('composer update', 'composer dump-autoload')
+        'commands' => array(
+            'composer update',
+            'composer dump-autoload'
+        )
     ),
     'greeting.av.ru' => array(
         'branch' => 'master',
         'remote' => 'origin',
         'path' => '/var/www/greetingav.deploy24.com/',
         'submodule' => true
+    ),
+    'zakonum.ru' => array(
+        'branch' => 'master',
+        'remote' => 'origin',
+        'path' => '/var/www/zakonum.deploy24.com/',
+        'commands' => array(
+            'composer update',
+            'composer dump-autoload',
+            'php app/console cache:clear',
+            'php app/console doctrine:schema:update --force'
+        )
     ),
 );
 
