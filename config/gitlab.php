@@ -20,7 +20,8 @@ return array(
     'greeting.av.ru' => array(
         'branch' => 'master',
         'remote' => 'origin',
-        'path' => '/var/www/greetingav.deploy24.com/'
+        'path' => '/var/www/greetingav.deploy24.com/',
+        'submodule' => true
     ),
 );
 

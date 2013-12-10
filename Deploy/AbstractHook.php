@@ -83,6 +83,11 @@ abstract class AbstractHook {
     private $logging;
 
     /**
+     * Flag for use .git submodule
+     */
+    private $submodule;
+
+    /**
      * Flag for use .git securing
      */
     private $secure;
@@ -120,7 +125,7 @@ abstract class AbstractHook {
 
         $this->name = $name;
 
-        $available_options = array('branch', 'remote', 'commit', 'callback', 'commands', 'logging', 'secure');
+        $available_options = array('branch', 'remote', 'commit', 'callback', 'commands', 'logging', 'submodule', 'secure');
 
         foreach($repo as $option => $value){
             if(in_array($option, $available_options)){
@@ -159,6 +164,7 @@ abstract class AbstractHook {
             'commit' => '',
             'commands' => array(),
             'logging' => false,
+            'submodule' => false,
             'secure' => false
         );
         $repo = array_merge($defaults, $repo);
@@ -198,6 +204,11 @@ abstract class AbstractHook {
 
             // Update the local repository
             exec('git pull ' . $this->remote . ' ' . $this->branch);
+
+            if($this->submodule) {
+                exec('git submodule init');
+                exec('git submodule update');
+            }
 
             if($this->secure) {
                 // Secure the .git directory
