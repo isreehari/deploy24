@@ -10,7 +10,7 @@ return array(
         'remote' => 'origin',
         'path' => '/var/www/chatter.deploy24.com/',
         'commands' => array(
-            'composer update',
+            'composer update --no-dev',
             'composer dump-autoload',
         )
     ),
@@ -19,7 +19,7 @@ return array(
         'remote' => 'origin',
         'path' => '/var/www/rusantic.deploy24.com/',
         'commands' => array(
-            'composer update',
+            'composer update --no-dev',
             'composer dump-autoload',
         )
     ),
@@ -34,7 +34,7 @@ return array(
         'remote' => 'origin',
         'path' => '/var/www/zakonum.deploy24.com/',
         'commands' => array(
-            'composer update',
+            'composer update --no-dev',
             'composer dump-autoload',
             'php app/console cache:clear',
             'php app/console doctrine:schema:update --force',
