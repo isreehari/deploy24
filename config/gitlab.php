@@ -1,10 +1,15 @@
 <?php
 return array(
-	'deploy24.com' => array(
-		'branch' => 'master',
-		'remote' => 'origin',
-		'path' => '/var/www/deploy24.com/'
-	),
+    'golubev.eu' => array(
+        'branch' => 'master',
+        'remote' => 'origin',
+        'path' => '/var/www/golubev.eu/'
+    ),
+    'deploy24.com' => array(
+        'branch' => 'master',
+        'remote' => 'origin',
+        'path' => '/var/www/deploy24.com/'
+    ),
     'chatter.deploy24.com' => array(
         'branch' => 'master',
         'remote' => 'origin',
@@ -36,10 +41,9 @@ return array(
         'commands' => array(
             'composer update --no-dev',
             'composer dump-autoload',
-            'php app/console cache:clear',
             'php app/console doctrine:schema:update --force',
+            'php app/console doctrine:fixtures:load',
             'php app/console assets:install',
         )
     ),
 );
-
