@@ -40,10 +40,18 @@ return array(
         'path' => '/var/www/zakonum.deploy24.com/',
         'commands' => array(
             'composer update --no-dev',
-            'composer dump-autoload',
             'php app/console doctrine:schema:update --force',
             'php app/console doctrine:fixtures:load',
             'php app/console assets:install',
+        )
+    ),
+    'pzz.by' => array(
+        'branch' => 'master',
+        'remote' => 'origin',
+        'path' => '/var/www/pzz.deploy24.com/',
+        'commands' => array(
+            'composer update --no-dev --prefer-dist',
+            'php artisan migrate'
         )
     ),
 );
