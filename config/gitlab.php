@@ -41,8 +41,8 @@ return array(
         'commands' => array(
             'composer update --no-dev',
             'php app/console doctrine:schema:update --force',
-            'php app/console doctrine:fixtures:load',
-            'php app/console assets:install',
+            'php app/console assets:install --symlink',
+            'php app/console assetic:dump',
         )
     ),
     'pzz.by' => array(
