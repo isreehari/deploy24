@@ -5,7 +5,9 @@
 	require_once APP_PATH.'/Deploy/AbstractHook.php';
 	require_once APP_PATH.'/Deploy/GitHubHook.php';
 
-	if(isset($_POST['payload']))
+	$payload = file_get_contents("php://input");
+
+	if(isset($payload))
 	{
 		$repos = require_once APP_PATH.'/config/github.php';
 
