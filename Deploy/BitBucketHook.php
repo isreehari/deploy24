@@ -12,9 +12,12 @@ class BitBucketHook extends AbstractHook {
 		$payload = json_decode(stripslashes($payload), true);
 		$name = $payload['repository']['name'];
 		if (isset($this->repos[$name]) && $this->repos[$name]['branch'] === $payload['commits'][0]['branch']) {
+			$this->log('Hook repository `' . $name . '` on branch `' . $branch . '`');
 			$repo = $this->repos[$name];
-			$repo['commit'] = $payload['commits'][0]['node'];
+			$repo['commit'] = $commit;
 			$this->process($name, $repo);
+		} else {
+			$this->log('No hook for repository `' . $name . '` on branch `' . $branch . '`', 'ERROR');
 		}
 	}
 }
