@@ -80,7 +80,7 @@ abstract class AbstractHook {
     /**
      * Flag for use logging
      */
-    private $logging;
+    private $logging = false;
 
     /**
      * Flag for use .git submodule
