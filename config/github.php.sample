@@ -1,0 +1,19 @@
+<?php
+
+/*
+Add your deploy hooks in format:
+
+    'repository_name' => array(
+        'branch' => 'master',
+        'remote' => 'origin',
+        'path' => '/var/www/project_folder_name/',
+        'commands' => array(
+            'cmd command 1',
+            'cmd command 2'
+        )
+    )
+
+ */
+
+return array(
+);
