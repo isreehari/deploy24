@@ -17,6 +17,8 @@ class GitLabHook extends AbstractHook {
 			$repo = $this->repos[$name];
 			$repo['commit'] = $commit;
 			$this->process($name, $repo);
+		} else {
+			$this->log('No hook for repository `' . $name . '` on branch `' . $branch . '`', 'ERROR');
 		}
 	}
 }

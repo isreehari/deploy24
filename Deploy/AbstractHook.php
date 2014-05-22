@@ -188,7 +188,9 @@ abstract class AbstractHook {
 	        }
 
 	        file_put_contents($filename, date($this->logDateFormat) . ' --- ' . $type . ': ' . $message . PHP_EOL, FILE_APPEND);
-	    }
+	    } else {
+            echo $type . ': ' . $message . PHP_EOL;
+        }
     }
 
     /**
